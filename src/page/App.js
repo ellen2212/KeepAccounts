@@ -15,7 +15,11 @@ import WelcomePage from './WelcomePage';
 const AppNavigator = createStackNavigator({
   Welcome: {screen: WelcomePage},
   Tab: {screen: TabPage}
-},{initialRouteName: 'Welcome'});
+},{
+  initialRouteName: 'Welcome',
+  headerMode: 'none',
+  mode: 'modal'
+});
 
 export default createAppContainer(AppNavigator);
 
