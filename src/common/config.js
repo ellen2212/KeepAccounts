@@ -13,5 +13,4 @@ const icons = [
 
 
 module.exports ={
-  icons
 }

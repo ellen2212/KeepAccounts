@@ -10,11 +10,11 @@ import { UltimateListView } from 'react-native-ultimate-listview';
 import IonIcons from 'react-native-vector-icons/Ionicons'
 
 const data = [
-  {title:'pay-catering',icon:'nutrition',cost:300},
-  {title:'pay-traffic',icon:'nutrition',cost:300},
-  {title:'pay-shopping',icon:'nutrition',cost:300},
-  {title:'pay-exerise',icon:'nutrition',cost:3000},
-  {title:'pay-housing',icon:'nutrition',cost:300}
+  {title:'pay-catering',icon:'ios-nutrition',cost:300},
+  {title:'pay-traffic',icon:'ios-nutrition',cost:300},
+  {title:'pay-shopping',icon:'ios-nutrition',cost:300},
+  {title:'pay-exerise',icon:'ios-nutrition',cost:3000},
+  {title:'pay-housing',icon:'ios-nutrition',cost:300}
 ]
 
 type Props = {};
@@ -28,20 +28,19 @@ export default class HomePage extends Component<Props> {
         rowData = [];
       }else{
         let l = data.length;
-        rowData = Array.from({length:pageLimit}).map((i)=>data[(i % l)]);
+        rowData = Array.from({length:pageLimit}).map((v,i)=>data[(i % l)]);
       }
-      console.log(rowData);
       await this.sleep(2000);
       startFetch(rowData,pageLimit);
     }catch (err) {
       abortFetch();
     }
   }
-  renderItem = (item, index)=>{
+  renderItem = (item, index, separators)=>{
     return (
       <Flex>
         <Flex.Item>
-          <IonIcons name={item.icon} size="20"/>
+          <IonIcons name={item.icon} size={20}/>
         </Flex.Item>
         <Flex.Item>
           <Text>{item.title}</Text>
