@@ -2,12 +2,13 @@
  * Created by itwo on 7/3/2019.
  */
 import React, {Component} from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View, TextInput } from 'react-native';
 import KStatusBar from '../component/KStatusBar';
 import KHeader from '../component/KHeader';
-import { Flex } from 'antd-mobile-rn';
 import { UltimateListView } from 'react-native-ultimate-listview';
-import IonIcons from 'react-native-vector-icons/Ionicons'
+import { color } from '../common/theme';
+import KBGIcon from '../component/KBGIcon';
+import {Flex} from 'antd-mobile-rn';
 
 const data = [
   {title:'pay-catering',icon:'ios-nutrition',cost:300},
@@ -19,6 +20,15 @@ const data = [
 
 type Props = {};
 export default class HomePage extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.onTitleChange = (event) =>{
+      console.warn(event);
+    }
+    this.onCostChange = (event) =>{
+      console.warn(event);
+    }
+  }
   sleep = (time: any)=> new Promise(resolve=>setTimeout(()=>resolve(),time));
   onFetch = async (page = 1,startFetch,abortFetch)=>{
     try {
@@ -39,16 +49,21 @@ export default class HomePage extends Component<Props> {
   renderItem = (item, index, separators)=>{
     return (
       <Flex>
-        <Flex.Item>
-          <IonIcons name={item.icon} size={20}/>
+        <Flex.Item flex={1}>
+          <KBGIcon name={item.icon} size={18} color={color('MainColor')}></KBGIcon>
         </Flex.Item>
-        <Flex.Item>
-          <Text>{item.title}</Text>
+        <Flex.Item flex={6}>
+          <TextInput value={item.title} onChange={this.onTitleChange}></TextInput>
         </Flex.Item>
-        <Flex.Item>
-          <Text>{item.cost}</Text>
+        <Flex.Item style={styles.textRight} flex={3}>
+          <TextInput value={item.cost} onChange={this.onCostChange} keyboardType="numeric"></TextInput>
         </Flex.Item>
       </Flex>
+    );
+  }
+  renderHeader = (item)=>{
+    return (
+      <View></View>
     );
   }
   render() {
@@ -59,6 +74,7 @@ export default class HomePage extends Component<Props> {
         <UltimateListView
           onFetch={this.onFetch}
           item={this.renderItem}
+          header={this.renderHeader}
         />
       </View>
     );
@@ -69,14 +85,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
   instructions: {
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
   },
+  textRight: {
+    textAlign: 'right'
+  }
 });

@@ -5,7 +5,11 @@
 import { StyleSheet } from 'react-native';
 
 const theme = {
-  MainColor: '#fed954'
+  MainColor: '#fed954',
+  lightgray:  '#999999',//icon
+  gray:       '#EFEFF4',//background
+  darkgray:   '#A8AEBA',//avatar
+  border:     '#c8c7cc'
 };
 
 function color(colorName) {
@@ -22,6 +26,10 @@ function color(colorName) {
 const commonStyle = StyleSheet.create({
   mainBgColor: {
     backgroundColor: color('MainColor')
+  },
+  textCenter: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
