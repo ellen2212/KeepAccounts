@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   bgIcon: {
     width:30,
     height:30,
-    margin:5,
+    margin: 10,
     borderRadius: 60,
     justifyContent:'center',
     alignItems:'center',

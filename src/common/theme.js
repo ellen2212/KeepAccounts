@@ -30,6 +30,10 @@ const commonStyle = StyleSheet.create({
   textCenter: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  border: {
+    borderBottomWidth: 1,
+    borderColor: color('border')
   }
 });
 
