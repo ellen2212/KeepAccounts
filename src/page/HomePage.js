@@ -25,9 +25,9 @@ export default class HomePage extends Component<Props> {
     this.headers= {}
   }
   async sleep(time: any){
-    return new Promise(resolve=>setTimeout(()=>resolve(),time));
+    await new Promise(resolve=>setTimeout(()=>resolve(),time));
   }
-  onFetch(page = 1,startFetch,abortFetch){
+  async onFetch(page = 1,startFetch,abortFetch){
     try {
       let rowData;
       let pageLimit = 20;
@@ -37,9 +37,10 @@ export default class HomePage extends Component<Props> {
         let l = data.length;
         rowData = Array.from({length:pageLimit}).map((v,i)=>data[(i % l)]);
       }
-      await this.sleep(2000);
+      await this.sleep(500);
       startFetch(rowData,pageLimit);
     }catch (err) {
+      console.warn(err);
       abortFetch();
     }
   };
@@ -87,7 +88,7 @@ export default class HomePage extends Component<Props> {
         <KStatusBar></KStatusBar>
         <KHeader headerType="home"></KHeader>
         <UltimateListView
-          onFetch={()=>this.onFetch()}
+          onFetch={(page,startFetch,abortFetch)=>this.onFetch(page,startFetch,abortFetch)}
           item={(item, index, separators)=>this.renderItem(item, index, separators)}
         />
       </View>
