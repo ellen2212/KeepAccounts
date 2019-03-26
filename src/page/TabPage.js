@@ -3,18 +3,29 @@
  */
 import React, {Component} from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator, createAppContainer, createStackNavigator } from 'react-navigation';
 import HomePage from './HomePage';
 import ChartPage from './ChartPage';
 import RecordPage from './RecordPage';
+import AddTypePage from './AddTypePage';
 import FindPage from './FindPage';
 import MyPage from './MyPage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
+const recordNavigator = createStackNavigator({
+  Record: RecordPage,
+  AddType: AddTypePage
+},{
+  initialRouteName: 'Record',
+  headerMode: 'none',
+  tabBarVisible: false
+})
+
+
 const TabNavigator = createBottomTabNavigator({
   Home: HomePage,
   Chart: ChartPage,
-  Record : RecordPage,
+  Record : recordNavigator,
   Find : FindPage,
   My : MyPage
 },{

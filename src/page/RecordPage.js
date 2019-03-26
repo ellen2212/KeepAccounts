@@ -2,7 +2,7 @@
  * Created by itwo on 7/3/2019.
  */
 import React, {Component} from 'react';
-import { Platform, StyleSheet, Text, View, TouchableOpacity, Modal } from 'react-native';
+import { Platform, StyleSheet, Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { color } from '../common/theme';
 import { UltimateListView } from 'react-native-ultimate-listview';
 import KBGIcon from '../component/KBGIcon';
@@ -52,9 +52,10 @@ export default class RecordPage extends Component<Props> {
 
   onClick(item) {
     if(item.action == 'add-type') {
-      this.setState({modalVisible: true});
+      this.props.navigation.navigate({'routeName':'AddType'});
+    }else{
+
     }
-    console.warn('click');
   }
 
   renderItem(item, index, separators){
@@ -67,6 +68,15 @@ export default class RecordPage extends Component<Props> {
       </TouchableOpacity>
     );
   }
+
+  titleChange(value) {
+
+  }
+
+  costChange(value) {
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -75,21 +85,9 @@ export default class RecordPage extends Component<Props> {
           item={(item, index, separators)=>this.renderItem(item, index, separators)}
           numColumns={4}
         />
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            alert("Modal has been closed.");
-          }}
-        >
-          <View style={{ marginTop: 22 }}>
-            <View>
-              <Text>Hello World!</Text>
-                <Text>Hide Modal</Text>
-            </View>
-          </View>
-        </Modal>
+        <View style={styles.footer}>
+          <TextInput value={this.state.title} onChange={(val)=>this.titleChange(val)}></TextInput>
+        </View>
       </View>
     );
   }
@@ -106,5 +104,9 @@ const styles = StyleSheet.create({
   center: {
     flex: 1,
     alignItems: 'center'
+  },
+  footer : {
+    position: 'absolute',
+    bottom: 0
   }
 });
