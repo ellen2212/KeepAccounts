@@ -6,6 +6,7 @@ import { Platform, StyleSheet, Text, View, TouchableOpacity, TextInput } from 'r
 import { color } from '../common/theme';
 import { UltimateListView } from 'react-native-ultimate-listview';
 import KBGIcon from '../component/KBGIcon';
+import { Flex } from 'antd-mobile-rn';
 
 
 const data = [
@@ -20,10 +21,11 @@ const setting = {title:'Settings',icon:'ios-settings',action: 'add-type'}
 
 type Props = {};
 export default class RecordPage extends Component<Props> {
+
   constructor(props) {
     super(props);
     this.state = {
-      modalVisible: false
+      showAddContainer: false
     }
   }
 
@@ -54,7 +56,7 @@ export default class RecordPage extends Component<Props> {
     if(item.action == 'add-type') {
       this.props.navigation.navigate({'routeName':'AddType'});
     }else{
-
+      this.setState({showAddContainer:true});
     }
   }
 
@@ -69,25 +71,43 @@ export default class RecordPage extends Component<Props> {
     );
   }
 
-  titleChange(value) {
-
+  footer() {
+    return (
+      <Flex style={styles.footer}>
+        <Flex.Item flex={6}>
+          <TextInput placeholder="备注" value={this.state.title} onChange={(val)=>this.titleChange(val)}></TextInput>
+        </Flex.Item>
+        <Flex.Item flex={4}>
+          <TextInput placeholder="金额" value={this.state.cost} onChange={(val)=>this.costChange(val)} keyboardType="numeric"></TextInput>
+        </Flex.Item>
+      </Flex>
+    );
   }
 
-  costChange(value) {
-
+  header() {
+    return (
+      <Flex>
+        <Flex.Item style={styles.header}>
+          <Text style={styles.fontColor}>收入</Text>
+        </Flex.Item>
+        <Flex.Item style={styles.header}>
+          <Text style={styles.fontColor}>支出</Text>
+        </Flex.Item>
+      </Flex>
+    );
   }
 
   render() {
+    let footer = this.footer();
     return (
       <View style={styles.container}>
+        {this.header()}
         <UltimateListView
           onFetch={(page,startFetch,abortFetch)=>this.onFetch(page,startFetch,abortFetch)}
           item={(item, index, separators)=>this.renderItem(item, index, separators)}
           numColumns={4}
         />
-        <View style={styles.footer}>
-          <TextInput value={this.state.title} onChange={(val)=>this.titleChange(val)}></TextInput>
-        </View>
+        {this.state.showAddContainer && footer}
       </View>
     );
   }
@@ -101,12 +121,22 @@ const styles = StyleSheet.create({
     width: '25%',
     padding: 10
   },
-  center: {
-    flex: 1,
-    alignItems: 'center'
-  },
   footer : {
     position: 'absolute',
-    bottom: 0
+    bottom: 0,
+    height: 50,
+    borderTopWidth: 1,
+    borderColor: color('border'),
+    backgroundColor: '#fff',
+    width: '100%'
+  },
+  header: {
+    backgroundColor: color('MainColor'),
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  fontColor: {
+    color:'#fff'
   }
 });
