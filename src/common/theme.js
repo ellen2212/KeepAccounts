@@ -9,7 +9,10 @@ const theme = {
   lightgray:  '#999999',//icon
   gray:       '#EFEFF4',//background
   darkgray:   '#A8AEBA',//avatar
-  border:     '#c8c7cc'
+  border:     '#c8c7cc',
+  black:      '#000',
+  danger:     '#f53d3d',
+  secondary:  '#32db64'
 };
 
 function color(colorName) {

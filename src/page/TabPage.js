@@ -8,6 +8,7 @@ import HomePage from './HomePage';
 import ChartPage from './ChartPage';
 import RecordPage from './RecordPage';
 import AddTypePage from './AddTypePage';
+import AddDetailPage from './AddDetailPage';
 import FindPage from './FindPage';
 import MyPage from './MyPage';
 import IonIcons from 'react-native-vector-icons/Ionicons';
@@ -15,7 +16,8 @@ import KAddButton from '../component/KAddButton';
 
 const recordNavigator = createStackNavigator({
   Record: RecordPage,
-  AddType: AddTypePage
+  AddType: AddTypePage,
+  AddDetail: AddDetailPage
 },{
   initialRouteName: 'Record',
   headerMode: 'none'
